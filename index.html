@@ -1,67 +1,268 @@
 <!DOCTYPE html>
-
 <html>
-  <head>
-    <title>Color Game</title>
-    <link rel="stylesheet" href="./index.css" />
-  </head>
-  <body onload="newGame()">
-    <div id="header">
-      <h2>The Great</h2>
-      <h1 id="header-clue">rgb(xxx,xxx,xxx)</h1>
-      <h2>Guessing Game</h2>
-    </div>
-    <div id="container">
-      <div class="tile" id="1"></div>
-      <div class="tile" id="2"></div>
-    </div>
+    <head>
+        <title>Color Game 2.0</title>
+        <link rel="stylesheet" href="./index.css" />
+    </head>
+    <body onload="newGame()">
+        <div id="header">
+            <h2>The Great</h2>
+            <h1 id="header-clue">rgb(xxx,xxx,xxx)</h1>
+            <h2>Guessing Game 2.0</h2>
+        </div>
+        <div id="content">
+            <div id="sidebar">
+                <h3>Tries Left</h3>
+                <h2 id="no">3</h2>
+                <div class="try" id="a1"></div>
+                <div class="try" id="a2"></div>
+                <div class="try" id="a3"></div>
+            </div>
+            <div>
+            <div class="container">
+                <div class="tile" id="1"></div>
+                <div class="tile" id="2"></div>
+                <div class="tile" id="3"></div>
+            </div>
+            <div class="container">
+                <div class="tile" id="4"></div>
+                <div class="tile" id="5"></div>
+                <div class="tile" id="6"></div>
+            </div>    
+            </div>
+        </div>
+        <div id="footer">
+          <button type="button" onclick="window.location.reload();"><h2>New Game!</h2></button> 
+        </div>
+        <script>
+            var t = [document.getElementById("1"),document.getElementById("2"),document.getElementById("3"),document.getElementById("4"),document.getElementById("5"),document.getElementById("6")];
+            var r = [document.getElementById("a1"),document.getElementById("a2"),document.getElementById("a3")]
+            var q = document.getElementById("sidebar");
+            var f = document.getElementById("footer");
+            var n = document.getElementById("no");
+            var c=0;
+            var x;
+            var correctColor;
+            var a=0;
 
-    <script>
-      var t1 = document.getElementById("1");
-      var t2 = document.getElementById("2");
-      var x;
-      var correctColor;
+            function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+             color += letters[Math.floor(Math.random() * 16)];
+             }
+            return color;
+            }
 
-      function getRandomColor() {
-        var letters = "0123456789ABCDEF";
-        var color = "#";
-        for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
+            function newGame() {
+                for (var i = 0; i < 6; i++){
+                t[i].style.background = getRandomColor();
+                }
 
-      function newGame() {
-        t1.style.background = getRandomColor();
-        t2.style.background = getRandomColor();
+            x = Math.floor(Math.random() * 6 + 0);
+            correctColor = t[x].style.background;
+            document.getElementById("header-clue").innerHTML = correctColor;
+            }
 
-        x = Math.floor(Math.random() * 2 + 1);
 
-        if (x == 1) correctColor = t1.style.background;
-        else correctColor = t2.style.background;
-        /* console.log(x);
-        console.log(correctColor); */
-
-        document.getElementById("header-clue").innerHTML = correctColor;
-      }
-
-      t1.addEventListener("click", function () {
-        if (t1.style.background == correctColor) {
-          t2.style.background = correctColor;
+            t[0].addEventListener("click", function () {
+             if (a==3)
+             {
+              c++;
+             } 
+               else{
+        if (t[0].style.background == correctColor) {
+            for (var i = 0; i < 6; i++){ 
+          t[i].style.background = correctColor;
+            }
+            q.style.background = "black";
+            for(i = 0; i<3;i++){
+              r[i].style.background = "black";
+            }
+          f.style.background = correctColor;
           document.getElementById("header").style.background = correctColor;
-        } else {
-          t1.style.background = "black";
+        } else {a++;
+          if(a==1){
+            r[0].style.background = "white";
+            n.innerHTML = "2";
+          }
+          if (a==2) {
+            r[1].style.background = "white";
+            n.innerHTML = "1";  
+          }
+          if (a==3) {
+            r[2].style.background = "white";
+            n.innerHTML = "0";
+          }
+          t[0].style.background = "black";
         }
+      }
       });
-
-      t2.addEventListener("click", function () {
-        if (t2.style.background == correctColor) {
-          t1.style.background = correctColor;
+      t[1].addEventListener("click", function () {
+        if (a==3)
+             {
+              c++;
+             } 
+               else{
+        if (t[1].style.background == correctColor) {
+            for (var i = 0; i < 6; i++){ 
+          t[i].style.background = correctColor;
+            }
+            q.style.background = "black";
+            for(i = 0; i<3;i++){
+              r[i].style.background = "black";
+            }
+            f.style.background = correctColor;
           document.getElementById("header").style.background = correctColor;
-        } else {
-          t2.style.background = "black";
+        } else {a++;
+          if(a==1){
+            r[0].style.background = "white";
+            n.innerHTML = "2";
+          }
+          if (a==2) {
+            r[1].style.background = "white"; 
+            n.innerHTML = "1"; 
+          }
+          if (a==3) {
+            r[2].style.background = "white";
+            n.innerHTML = "0";
+          }
+          t[1].style.background = "black";
         }
+      }
       });
-    </script>
-  </body>
+      t[2].addEventListener("click", function () {
+        if (a==3)
+             {
+              c++;
+             } 
+               else{
+        if (t[2].style.background == correctColor) {
+            for (var i = 0; i < 6; i++){ 
+          t[i].style.background = correctColor;
+            }
+            q.style.background = "black";
+            for(i = 0; i<3;i++){
+              r[i].style.background = "black";
+            }
+            f.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+        } else {a++;
+          if(a==1){
+            r[0].style.background = "white";
+            n.innerHTML = "2";
+          }
+          if (a==2) {
+            r[1].style.background = "white"; 
+            n.innerHTML = "1"; 
+          }
+          if (a==3) {
+            r[2].style.background = "white";
+            n.innerHTML = "0";
+          }
+          t[2].style.background = "black";
+        }
+      }
+      });
+      t[3].addEventListener("click", function () {
+        if (a==3)
+             {
+              c++;
+             } 
+               else{
+        if (t[3].style.background == correctColor) {
+            for (var i = 0; i < 6; i++){ 
+          t[i].style.background = correctColor;
+            }
+            q.style.background = "black";
+            for(i = 0; i<3;i++){
+              r[i].style.background = "black";
+            }
+            f.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+        } else {a++;
+          if(a==1){
+            r[0].style.background = "white";
+            n.innerHTML = "2";
+          }
+          if (a==2) {
+            r[1].style.background = "white"; 
+            n.innerHTML = "1"; 
+          }
+          if (a==3) {
+            r[2].style.background = "white";
+            n.innerHTML = "0";
+          }
+          t[3].style.background = "black";
+        }
+      }
+      });
+      t[4].addEventListener("click", function () {
+        if (a==3)
+             {
+              c++;
+             } 
+               else{
+        if (t[4].style.background == correctColor) {
+            for (var i = 0; i < 6; i++){ 
+          t[i].style.background = correctColor;
+            }
+            q.style.background = "black";
+            for(i = 0; i<3;i++){
+              r[i].style.background = "black";
+            }
+            f.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+        } else {a++;
+          if(a==1){
+            r[0].style.background = "white";
+            n.innerHTML = "2";
+          }
+          if (a==2) {
+            r[1].style.background = "white";
+            n.innerHTML = "1"; 
+          }
+          if (a==3) {
+            r[2].style.background = "white";
+            n.innerHTML = "0";
+          }
+          t[4].style.background = "black";
+        }
+      }
+      });
+      t[5].addEventListener("click", function () {
+        if (a==3)
+             {
+              c++;
+             } 
+               else{
+        if (t[5].style.background == correctColor) {
+            for (var i = 0; i < 6; i++){ 
+          t[i].style.background = correctColor;
+            }
+            q.style.background = "black";
+            for(i = 0; i<3;i++){
+              r[i].style.background = "black";
+            }
+            f.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+        } else {a++;
+          if(a==1){
+            r[0].style.background = "white";
+            n.innerHTML = "2";
+          }
+          if (a==2) {
+            r[1].style.background = "white";
+            n.innerHTML = "1";  
+          }
+          if (a==3) {
+            r[2].style.background = "white";
+            n.innerHTML = "0";
+          }
+          t[5].style.background = "black";
+        }
+      }
+      });
+        </script>
+    </body>
 </html>
